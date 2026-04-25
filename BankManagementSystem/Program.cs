@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System;using Systemusing System.Security.Principal;
 using System.Windows.Forms;
 
 namespace BankManagementSystem
 {
     static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        private static readonly string StartupUser =
+            WindowsIdentity.GetCurrent().Name;
+
         [STAThread]
         static void Main()
         {
+            if (!Environment.UserInteractive)
+            {
+                throw new InvalidOperationException("Interactive session required.");
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WelcomeUI());
