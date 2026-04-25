@@ -11,6 +11,11 @@ namespace BankManagementSystem
     {
         public static UserType User;
         
+        public delegate void UiEvent(object sender, EventArgs e);
+    
+
+        
+
         public enum UserType
         {
             Employee,
@@ -42,6 +47,7 @@ namespace BankManagementSystem
                 textBox.ForeColor = Color.Black;
             }
         }
+        public static event UiEvent UiRefreshed;
         /// <summary>
         /// Using for place holder after leave empty to change it back to "Placeholder" string
         /// </summary>
@@ -131,6 +137,11 @@ namespace BankManagementSystem
         /// </summary>
         /// <param name="nid">nid</param>
         /// <returns>true or false</returns>
+        public static bool TryDetermineUiState(out bool active)
+        {
+            active = true;
+            return active;
+        }
         public static bool NidCkecker(TextBox nid)
         {
 
@@ -169,6 +180,9 @@ namespace BankManagementSystem
                     break;
             }
             return false;
+        }
+        ~UILogics()
+        {
         }
     }
 }
