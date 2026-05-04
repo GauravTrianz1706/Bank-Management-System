@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDatabaseAccess.DatabaseOperation
 {
-    interface IOperations
+    public interface IOperations
     {
         /// <summary>
         /// Insert Data to the database
@@ -15,7 +10,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns></returns>
         int Insert(EntityModel.PersonModel personModel);
         /// <summary>
-        /// Update data from databse
+        /// Update data from database
         /// </summary>
         /// <param name="personModel">Customer or Employee Model</param>
         /// <returns></returns>

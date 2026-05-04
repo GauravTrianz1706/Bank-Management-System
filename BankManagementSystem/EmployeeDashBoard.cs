@@ -1,6 +1,6 @@
 using BankDatabaseAccess.EntityModel;
+using System;
 using System.IO;
-using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace BankManagementSystem
@@ -21,11 +21,13 @@ namespace BankManagementSystem
             this.personModel = personModel;
             InitializeComponent();
 
-            
-            CurrentEmployeeSession = WindowsIdentity.GetCurrent().Name;
+            // Fixed: Replaced Windows Authentication with environment variable
+            CurrentEmployeeSession = Environment.GetEnvironmentVariable("EMPLOYEE_SESSION_ID") ?? "anonymous";
 
+            // Fixed: Replaced hardcoded Windows path with environment variable
+            string auditLogPath = Environment.GetEnvironmentVariable("AUDIT_LOG_PATH") ?? "/app/logs/session.log";
             auditStream = new FileStream(
-                @"C:\EmployeeAudit\session.log",
+                auditLogPath,
                 FileMode.OpenOrCreate);
         }
     }

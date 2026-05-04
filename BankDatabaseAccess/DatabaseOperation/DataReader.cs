@@ -1,11 +1,11 @@
-﻿using System.Data.SqlClient;
+using System.Data.SqlClient;
 using System.Data;
 
 namespace BankDatabaseAccess.DatabaseOperation
 {
     public class DataReader
     {
-        private string query = "--";
+        private string query = string.Empty;
         private  DataTable DataTable()
         {
             SqlDataAdapter adapter = new SqlDataAdapter(query, DatabaseConnection.Connection);
@@ -58,7 +58,7 @@ namespace BankDatabaseAccess.DatabaseOperation
                 return "Customers";
             if (employee)
                 return "Employee";
-            return null;
+            return string.Empty;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.EntityModel;
+using BankDatabaseAccess.EntityModel;
 using System;
 
 namespace BankDatabaseAccess.DatabaseOperation
@@ -18,11 +18,11 @@ namespace BankDatabaseAccess.DatabaseOperation
                           VALUES ('" + personModel.Username + "'," +
                           "'" + personModel.FullName + "'," +
                           "'" + personModel.Password + "'," +
-                          "'" + personModel.Eamil + "'," +
+                          "'" + personModel.Email + "'," +
                           "'" + personModel.Phone + "'," +
                           "'" + personModel.Nid + "'," +
                           "'" + personModel.Address + "'," +
-                          "'" + InitialBalance + "')"; // Set Opening Balance 1000 taka for all customers
+                          "'" + InitialBalance + "')"; // Set Opening Balance 100 for all customers
             return DatabaseConnection.Execute(query);
         }
         /// <summary>
@@ -36,18 +36,18 @@ namespace BankDatabaseAccess.DatabaseOperation
         }
 
         /// <summary>
-        /// Update a user form data base
+        /// Update a user from data base
         /// </summary>
         /// <param name="personModel">Take a Customer Object</param>
         /// <returns>row effect</returns>
         public int Update(PersonModel personModel)
         {
             var query = @"UPDATE dbo.[dbo.Customers] SET 
-                         Email = '" + personModel.Eamil + "'," +
+                         Email = '" + personModel.Email + "'," +
                          "Phone = '" + personModel.Phone + "'," +
                          "Nid = '" + personModel.Nid + "'," +
                          "Address = '" + personModel.Address + "'" +
-                         " WHERE '" + personModel.Username + "' = Username"; ;
+                         " WHERE '" + personModel.Username + "' = Username";
             return DatabaseConnection.Execute(query);
         }
         /// <summary>

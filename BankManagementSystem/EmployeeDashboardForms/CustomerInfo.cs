@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Messaging;
 using System.Windows.Forms;
@@ -14,9 +15,10 @@ namespace BankManagementSystem.EmployeeDashboardForms
             var queue = new MessageQueue(@".\Private$\customer-info");
             queue.Send("Customer viewed");
 
-            
+            // Fixed: Replaced hardcoded Windows path with environment variable
+            string customerLogPath = Environment.GetEnvironmentVariable("CUSTOMER_LOG_PATH") ?? "/app/logs/access.log";
             File.AppendAllText(
-                @"C:\CustomerLogs\access.log",
+                customerLogPath,
                 System.DateTime.Now.ToString());
         }
     }
