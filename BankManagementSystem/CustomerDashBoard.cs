@@ -1,5 +1,5 @@
 using BankDatabaseAccess.EntityModel;
-using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -17,8 +17,9 @@ namespace BankManagementSystem
             personModel = customer;
             InitializeComponent();
 
-           
-            Registry.CurrentUser.OpenSubKey(@"Software\BankApp");
+            // Fixed: Replaced Windows Registry access with environment variable configuration
+            // Configuration should be loaded from AWS Systems Manager Parameter Store or environment variables
+            string appConfig = Environment.GetEnvironmentVariable("BANK_APP_CONFIG") ?? "default";
         }
     }
 }

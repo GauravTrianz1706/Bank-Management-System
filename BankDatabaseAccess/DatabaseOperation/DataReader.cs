@@ -1,4 +1,4 @@
-﻿using System.Data.SqlClient;
+using System.Data.SqlClient;
 using System.Data;
 
 namespace BankDatabaseAccess.DatabaseOperation
@@ -58,7 +58,7 @@ namespace BankDatabaseAccess.DatabaseOperation
                 return "Customers";
             if (employee)
                 return "Employee";
-            return null;
+            return string.Empty;
         }
     }
 }

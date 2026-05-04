@@ -1,0 +1,75 @@
+# .dockerignore for .NET 8.0 Project
+# Exclude build artifacts, IDE files, and unnecessary files from Docker context
+
+# Build artifacts
+bin/
+obj/
+out/
+publish/
+*.dll
+*.exe
+*.pdb
+
+# IDE and editor files
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.swp
+*~
+.DS_Store
+
+# Git files
+.git/
+.gitignore
+.gitattributes
+
+# Documentation and markdown
+*.md
+docs/
+
+# Test files
+**/TestResults/
+**/*.Tests/
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# Build logs
+*.log
+*.tmp
+
+# OS files
+Thumbs.db
+Desktop.ini
+
+# Configuration files (may contain secrets)
+appsettings.Development.json
+appsettings.Local.json
+*.pfx
+*.p12
+
+# Docker files (don't copy into image)
+Dockerfile*
+docker-compose*
+.dockerignore
+
+# CI/CD files
+.github/
+.gitlab-ci.yml
+azure-pipelines.yml
+Jenkinsfile
+
+# Deployment scripts
+scripts/
+ecs/
+
+# Lock files (already restored)
+packages.lock.json
+project.lock.json

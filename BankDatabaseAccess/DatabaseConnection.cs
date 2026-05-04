@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -9,7 +9,11 @@ namespace BankDatabaseAccess
 {
     public static class DatabaseConnection
     {
-        public static readonly string Connection = System.Configuration.ConfigurationManager.ConnectionStrings["OpenBankLocal"].ConnectionString;
+        // Fixed: Replaced Web.config/App.config connection string with environment variable
+        // Use AWS Systems Manager Parameter Store or Secrets Manager for production
+        public static readonly string Connection = 
+            Environment.GetEnvironmentVariable("DB_CONNECTION_STRING") ?? 
+            "Data Source=${DB_HOST};Initial Catalog=${DB_NAME};User Id=${DB_USER};Password=${DB_PASSWORD}";
 
        public enum Error
         {

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Windows.Forms;
 
@@ -17,9 +18,13 @@ namespace BankManagementSystem.EmployeeDashboardForms
         {
             decimal.TryParse(AmountTextBox.Text, out LastDepositAmount);
 
+            // Fixed: Replaced Windows-specific drive letter path with cross-platform path using environment variable
+            string depositCachePath = Environment.GetEnvironmentVariable("DEPOSIT_CACHE_PATH") ?? Path.Combine(Path.GetTempPath(), "DepositCache");
+            Directory.CreateDirectory(depositCachePath);
+            string lastDepositFile = Path.Combine(depositCachePath, "last.txt");
             
             File.WriteAllText(
-                @"D:\DepositCache\last.txt",
+                lastDepositFile,
                 LastDepositAmount.ToString());
         }
     }
