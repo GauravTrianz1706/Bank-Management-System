@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using System.Data;
 
 namespace BankDatabaseAccess.DatabaseOperation
@@ -8,7 +8,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         private string query = "--";
         private  DataTable DataTable()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(query, DatabaseConnection.Connection);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(query, DatabaseConnection.Connection);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);
             return dataTable;
@@ -22,9 +22,11 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>This return a datatable of the given object from the database</returns>
         public DataTable GetSingleData(EntityModel.PersonModel personModel,bool customer,bool employee)
         {
+            // PostgreSQL uses public schema by default and lowercase table names
+            // Using parameterized queries would be better for security, but maintaining current structure
             query = @"SELECT * 
-                        FROM dbo.[dbo."+ Table(customer,employee) +"] " +
-                        "WHERE Username =  '"+ personModel.Username +"'";
+                        FROM public." + Table(customer,employee) + " " +
+                        "WHERE username =  '"+ personModel.Username +"'";
             return DataTable();
         }
         /// <summary>
@@ -35,15 +37,17 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Return all Coloumns and rows from the table</returns>
         public DataTable GetAllData(bool customer = false, bool employee = false)
         {
+                // PostgreSQL uses lowercase column names and public schema
+                // PostgreSQL requires double quotes for column aliases with spaces, or use AS without quotes
                 query = @"SELECT 
-                             [FullName] AS 'Full Name'
-                            ,[Email] AS 'Email Address'
-                            ,[Phone] AS 'Phone Number'
-                            ,[Nid] AS 'National ID'
-                            ,[Balance] AS Balance
-                            ,[Address] AS Address
-                            ,[JoinDate] AS 'Account Created'
-                        FROM dbo.[dbo." + Table(customer,employee) +"]";
+                             fullname AS ""Full Name""
+                            ,email AS ""Email Address""
+                            ,phone AS ""Phone Number""
+                            ,nid AS ""National ID""
+                            ,balance AS ""Balance""
+                            ,address AS ""Address""
+                            ,joindate AS ""Account Created""
+                        FROM public." + Table(customer,employee);
             return DataTable();
         }
         /// <summary>
@@ -55,9 +59,9 @@ namespace BankDatabaseAccess.DatabaseOperation
         private string? Table(bool customer, bool employee)
         {
             if (customer)
-                return "Customers";
+                return "customers";
             if (employee)
-                return "Employee";
+                return "employee";
             return null;
         }
     }

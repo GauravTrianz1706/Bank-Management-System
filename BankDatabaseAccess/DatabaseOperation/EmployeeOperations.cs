@@ -12,7 +12,9 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Returns Row Number</returns>
         public int Insert(PersonModel personModel)
         {
-            var query = @"INSERT INTO dbo.[dbo.Employee](Username,FullName,Password,Email,Address,Phone,Nid,Salary) 
+            // PostgreSQL uses lowercase table/column names and public schema
+            // Note: In production, use parameterized queries to prevent SQL injection
+            var query = @"INSERT INTO public.employee(username,fullname,password,email,address,phone,nid,salary) 
                           VALUES ('" + personModel.Username + "'," +
                           "'" + personModel.FullName + "'," +
                           "'" + personModel.Password + "'," +
@@ -20,7 +22,7 @@ namespace BankDatabaseAccess.DatabaseOperation
                           "'" + personModel.Address + "'," +
                           "'" + personModel.Phone + "'," +
                           "'" + personModel.Nid + "'," +
-                          "'" + new Random().Next(30000, 1000000).ToString() + "')"; // generates Salary from 30k to 100k
+                          new Random().Next(30000, 1000000) + ")"; // generates Salary from 30k to 100k - numeric value without quotes
                           return DatabaseConnection.Execute(query);
         }
         /// <summary>
@@ -30,8 +32,9 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Returns Row Number</returns>
         public int Delete(PersonModel personModel)
         {
-            var query = @"DELETE FROM dbo.[dbo.Customers] 
-                        WHERE Username = '" + personModel.Username +"'";
+            // PostgreSQL uses lowercase table/column names
+            var query = @"DELETE FROM public.customers 
+                        WHERE username = '" + personModel.Username +"'";
             return DatabaseConnection.Execute(query);
         }
         /// <summary>
@@ -41,12 +44,14 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Returns Row Number</returns>
         public int Update(PersonModel personModel)
         {
-            var query = @"UPDATE dbo.[dbo.Customers] SET 
-                        Email = '" + personModel.Email + "'," +
-                        "Phone = '" + personModel.Phone + "'," +
-                        "Address = '" + personModel.Address + "'," +
-                        "Nid = '" + personModel.Nid + "'" +
-                        "WHERE Username = '" + personModel.Username + "'";
+            // PostgreSQL uses lowercase table/column names
+            // Fixed: Added missing space before WHERE clause
+            var query = @"UPDATE public.customers SET 
+                        email = '" + personModel.Email + "'," +
+                        "phone = '" + personModel.Phone + "'," +
+                        "address = '" + personModel.Address + "'," +
+                        "nid = '" + personModel.Nid + "' " +
+                        "WHERE username = '" + personModel.Username + "'";
 
             return DatabaseConnection.Execute(query);
         }
@@ -57,12 +62,14 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns></returns>
         public int SelfUpdate(PersonModel personModel)
         {
-            var query = @"UPDATE dbo.[dbo.Employee] SET 
-                        Email = '" + personModel.Email + "'," +
-                        "Phone = '" + personModel.Phone + "'," +
-                        "Address = '" + personModel.Address + "'," +
-                        "Nid = '" + personModel.Nid + "'" +
-                        "WHERE Username = '"+ personModel.Username +"'";
+            // PostgreSQL uses lowercase table/column names
+            // Fixed: Added missing space before WHERE clause
+            var query = @"UPDATE public.employee SET 
+                        email = '" + personModel.Email + "'," +
+                        "phone = '" + personModel.Phone + "'," +
+                        "address = '" + personModel.Address + "'," +
+                        "nid = '" + personModel.Nid + "' " +
+                        "WHERE username = '"+ personModel.Username +"'";
             return DatabaseConnection.Execute(query);
         }
     }

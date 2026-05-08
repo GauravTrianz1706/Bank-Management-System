@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.DatabaseOperation;
+using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System;
 using System.Data;
@@ -9,6 +9,8 @@ namespace BankManagementSystem.EmployeeDashboardForms
     public partial class EditInfo : Form
     {
         private readonly PersonModel customer = new CustomerModel();
+        private const string error = "Invalid Username";
+
         public EditInfo()
         {
             InitializeComponent();
@@ -49,13 +51,16 @@ namespace BankManagementSystem.EmployeeDashboardForms
             }
         
         }
+
+        private void UpdateBtn_Click(object sender, EventArgs e)
+        {
             customer.Email = EmailTextbox.Text.ToLower();
             if (FormValidation())
             {
                 if (new EmployeeOperations().Update(customer) > 0)
                 {
                     MessageBox.Show($" {customer.Username} INFO Updated");
-                    ; ClearFilds();
+                    ClearFilds();
                 }
                 else
                 {
@@ -118,13 +123,12 @@ namespace BankManagementSystem.EmployeeDashboardForms
             {
                 customer.Phone = "N/A";
             }
-                if (string.IsNullOrEmpty(Nidtextbox.Text))
+            if (string.IsNullOrEmpty(Nidtextbox.Text))
             {
                 output = false;
             }
             return output;
         }
         #endregion
-        private const string error = "Invalid Username";
     }
 }

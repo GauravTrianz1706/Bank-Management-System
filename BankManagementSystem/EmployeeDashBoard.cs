@@ -10,7 +10,7 @@ namespace BankManagementSystem
         private readonly PersonModel personModel;
 
     
-        private static string CurrentEmployeeSession;
+        private static string CurrentEmployeeSession = string.Empty;
 
         
         
@@ -27,6 +27,36 @@ namespace BankManagementSystem
             auditStream = new FileStream(
                 @"C:\EmployeeAudit\session.log",
                 FileMode.OpenOrCreate);
+        }
+
+        private void HomeBtn_Click_1(object? sender, System.EventArgs e)
+        {
+            // Placeholder for HomeBtn_Click_1 event handler
+        }
+
+        private void CustomerInfoBtn_Click(object? sender, System.EventArgs e)
+        {
+            // Placeholder for CustomerInfoBtn_Click event handler
+        }
+
+        private void EditInfoBtn_Click(object? sender, System.EventArgs e)
+        {
+            // Placeholder for EditInfoBtn_Click event handler
+        }
+
+        private void LogoutBtn_Click_1(object? sender, System.EventArgs e)
+        {
+            // Placeholder for LogoutBtn_Click_1 event handler
+        }
+
+        private void DepositBtn_Click(object? sender, System.EventArgs e)
+        {
+            // Placeholder for DepositBtn_Click event handler
+        }
+
+        private void DeleteLnk_LinkClicked(object? sender, LinkLabelLinkClickedEventArgs e)
+        {
+            // Placeholder for DeleteLnk_LinkClicked event handler
         }
     }
 }

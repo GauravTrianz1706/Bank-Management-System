@@ -178,7 +178,7 @@ namespace BankManagementSystem
         #region Message for Users
         private void UpdatedDB(int EffectedRow)
         {
-            if (EffectedRow == (int)DatabaseConnection.Error.UsernameExist)
+            if (EffectedRow == (int)Error.UsernameExist)
             {
                 MessageBox.Show("Username Already Exist!");
 

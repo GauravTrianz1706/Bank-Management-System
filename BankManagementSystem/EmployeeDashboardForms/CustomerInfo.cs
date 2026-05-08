@@ -1,5 +1,4 @@
 using System.IO;
-using System.Messaging;
 using System.Windows.Forms;
 
 namespace BankManagementSystem.EmployeeDashboardForms
@@ -10,9 +9,9 @@ namespace BankManagementSystem.EmployeeDashboardForms
         {
             InitializeComponent();
 
-            
-            var queue = new MessageQueue(@".\Private$\customer-info");
-            queue.Send("Customer viewed");
+            // MessageQueue removed - System.Messaging not available in .NET 8.0
+            // var queue = new MessageQueue(@".\Private$\customer-info");
+            // queue.Send("Customer viewed");
 
             
             File.AppendAllText(

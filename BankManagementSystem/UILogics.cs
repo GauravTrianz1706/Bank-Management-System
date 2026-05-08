@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.DatabaseOperation;
+using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System.Drawing;
 using System.Globalization;
@@ -11,6 +11,7 @@ namespace BankManagementSystem
     {
         public static UserType User;
         
+        public static event UiEvent? UiRefreshed;
         public delegate void UiEvent(object sender, EventArgs e);
     
 
@@ -47,7 +48,7 @@ namespace BankManagementSystem
                 textBox.ForeColor = Color.Black;
             }
         }
-        public static event UiEvent UiRefreshed;
+        
         /// <summary>
         /// Using for place holder after leave empty to change it back to "Placeholder" string
         /// </summary>
@@ -180,9 +181,6 @@ namespace BankManagementSystem
                     break;
             }
             return false;
-        }
-        ~UILogics()
-        {
         }
     }
 }
