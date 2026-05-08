@@ -1,5 +1,5 @@
-﻿using BankDatabaseAccess.EntityModel;
 using System;
+using BankDatabaseAccess.EntityModel;
 
 namespace BankDatabaseAccess.DatabaseOperation
 {
@@ -22,7 +22,7 @@ namespace BankDatabaseAccess.DatabaseOperation
                           "'" + personModel.Phone + "'," +
                           "'" + personModel.Nid + "'," +
                           "'" + personModel.Address + "'," +
-                          "'" + InitialBalance + "')"; // Set Opening Balance 1000 taka for all customers
+                          "'" + InitialBalance + "')"; // Set Opening Balance 100 for all customers
             return DatabaseConnection.Execute(query);
         }
         /// <summary>
@@ -45,9 +45,9 @@ namespace BankDatabaseAccess.DatabaseOperation
             var query = @"UPDATE dbo.[dbo.Customers] SET 
                          Email = '" + personModel.Eamil + "'," +
                          "Phone = '" + personModel.Phone + "'," +
-                         "Nid = '" + personModel.Nid + "'," +
-                         "Address = '" + personModel.Address + "'" +
-                         " WHERE '" + personModel.Username + "' = Username"; ;
+                         "Address = '" + personModel.Address + "'," +
+                         "Nid = '" + personModel.Nid + "'" +
+                         " WHERE '" + personModel.Username + "' = Username";
             return DatabaseConnection.Execute(query);
         }
         /// <summary>

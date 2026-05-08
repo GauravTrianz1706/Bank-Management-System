@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System;
+using System.Configuration;
+using Microsoft.Data.SqlClient;
 
 namespace BankDatabaseAccess
 {
     public static class DatabaseConnection
     {
-        public static readonly string Connection = System.Configuration.ConfigurationManager.ConnectionStrings["OpenBankLocal"].ConnectionString;
+        public static readonly string Connection = ConfigurationManager.ConnectionStrings["OpenBankLocal"]?.ConnectionString ?? string.Empty;
 
        public enum Error
         {

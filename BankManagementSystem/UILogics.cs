@@ -1,9 +1,9 @@
-﻿using BankDatabaseAccess.DatabaseOperation;
-using BankDatabaseAccess.EntityModel;
-using System.Drawing;
-using System.Globalization;
+using System;
+using BankDatabaseAccess.DatabaseOperation;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Drawing;
+using System.Globalization;
 
 namespace BankManagementSystem
 {

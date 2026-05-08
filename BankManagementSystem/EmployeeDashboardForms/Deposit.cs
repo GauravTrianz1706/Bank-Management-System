@@ -5,7 +5,6 @@ namespace BankManagementSystem.EmployeeDashboardForms
 {
     public partial class Deposit : Form
     {
-        
         private static decimal LastDepositAmount;
 
         public Deposit()
@@ -17,10 +16,22 @@ namespace BankManagementSystem.EmployeeDashboardForms
         {
             decimal.TryParse(AmountTextBox.Text, out LastDepositAmount);
 
-            
-            File.WriteAllText(
-                @"D:\DepositCache\last.txt",
-                LastDepositAmount.ToString());
+            // Cache the last deposit amount
+            try
+            {
+                var cacheDir = @"D:\DepositCache";
+                if (!Directory.Exists(cacheDir))
+                {
+                    Directory.CreateDirectory(cacheDir);
+                }
+                File.WriteAllText(
+                    Path.Combine(cacheDir, "last.txt"),
+                    LastDepositAmount.ToString());
+            }
+            catch
+            {
+                // Ignore caching errors
+            }
         }
     }
 }
