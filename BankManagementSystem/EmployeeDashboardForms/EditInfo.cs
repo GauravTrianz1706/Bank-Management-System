@@ -49,13 +49,7 @@ namespace BankManagementSystem.EmployeeDashboardForms
             }
         
         }
-
-        private void UpdateBtn_Click(object sender, EventArgs e)
-        {
-            customer.Eamil = EmailTextbox.Text.ToLower();
-            customer.Phone = PhoneTextBox.Text;
-            customer.Nid = Nidtextbox.Text;
-            customer.Address = AddressTextbox.Text;
+            customer.Email = EmailTextbox.Text.ToLower();
             if (FormValidation())
             {
                 if (new EmployeeOperations().Update(customer) > 0)

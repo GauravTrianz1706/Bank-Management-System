@@ -102,13 +102,7 @@ namespace BankManagementSystem
         #endregion
         private void RegistrationBtn_Click(object sender, EventArgs e)
         {
-            User.Username = UsernameTextbox.Text;
-            User.FullName = FullNametextBox.Text;
-            User.Password = PasswordTextbox.Text;
-            User.Eamil = EmailTextbox.Text.ToLower();
-            User.Phone = PhoneTextBox.Text;
-            User.Nid = Nidtextbox.Text;
-            User.Address = AddressTextbox.Text;
+            User.Email = EmailTextbox.Text.ToLower();
             if (ValidForm())
             {
                 if (UILogics.IsEmployee())

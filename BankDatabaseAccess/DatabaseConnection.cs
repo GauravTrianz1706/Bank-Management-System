@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace BankDatabaseAccess
 {
+    public enum Error
+    {
+        UsernameExist = -1,
+        Success = 0
+    }
+
     public static class DatabaseConnection
     {
-        public static readonly string Connection = System.Configuration.ConfigurationManager.ConnectionStrings["OpenBankLocal"].ConnectionString;
-
-       public enum Error
-        {
-            UsernameExist = 4001
-        }
+        // Connection string should be configured via dependency injection or configuration in .NET 8
+        public static string Connection { get; set; } = "Server=localhost;Database=OpenBankLocal;Integrated Security=true;TrustServerCertificate=true;";
 
         public static int Execute(string query)
         {
@@ -27,9 +24,8 @@ namespace BankDatabaseAccess
                 }
                 catch (SqlException)
                 {
-                   return (int)Error.UsernameExist;
+                    return (int)Error.UsernameExist;
                 }
-
             }
         }
     }

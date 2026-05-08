@@ -26,13 +26,7 @@ namespace BankManagementSystem.EmployeeDashboardForms
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
-            employee.Username = employee.Username;
-            employee.Nid = NidTextbox.Text;
-            employee.Address = AddresstextBox.Text;
-            employee.Eamil = EmailtextBox.Text.ToLower();
-            employee.Phone = PhoneTextBox.Text;
-            if (FormValidation())
-            {
+            employee.Email = EmailtextBox.Text.ToLower();
                 Visibility(false);
                 UpdatedDB(new EmployeeOperations().SelfUpdate(employee));
                 UpdateUi();

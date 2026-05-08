@@ -1,4 +1,4 @@
-﻿using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 
 namespace BankDatabaseAccess.DatabaseOperation
@@ -52,7 +52,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <param name="customer">True if customer table needed</param>
         /// <param name="employee">True if employee table needed</param>
         /// <returns>Return The Table name as a string</returns>
-        private string Table(bool customer, bool employee)
+        private string? Table(bool customer, bool employee)
         {
             if (customer)
                 return "Customers";
