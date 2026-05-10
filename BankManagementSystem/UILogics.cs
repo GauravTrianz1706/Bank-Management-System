@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.DatabaseOperation;
+using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System.Drawing;
 using System.Globalization;
@@ -47,7 +47,7 @@ namespace BankManagementSystem
                 textBox.ForeColor = Color.Black;
             }
         }
-        public static event UiEvent UiRefreshed;
+        public static event UiEvent? UiRefreshed;
         /// <summary>
         /// Using for place holder after leave empty to change it back to "Placeholder" string
         /// </summary>
@@ -169,7 +169,7 @@ namespace BankManagementSystem
             switch (dialogResult)
             {
                 case DialogResult.None:
-                break;
+                    break;
                 case DialogResult.OK:
                     new CustomerOperation().Delete(personModel);
                     new LoginUI().Show();
@@ -180,9 +180,6 @@ namespace BankManagementSystem
                     break;
             }
             return false;
-        }
-        ~UILogics()
-        {
         }
     }
 }

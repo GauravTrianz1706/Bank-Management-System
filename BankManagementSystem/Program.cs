@@ -1,13 +1,10 @@
-using System;using Systemusing System.Security.Principal;
+using System;
 using System.Windows.Forms;
 
 namespace BankManagementSystem
 {
     static class Program
     {
-        private static readonly string StartupUser =
-            WindowsIdentity.GetCurrent().Name;
-
         [STAThread]
         static void Main()
         {
