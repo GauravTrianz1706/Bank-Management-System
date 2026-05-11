@@ -1,4 +1,5 @@
-using System;using Systemusing System.Security.Principal;
+using System;
+using System.Security.Principal;
 using System.Windows.Forms;
 
 namespace BankManagementSystem

@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.DatabaseOperation;
+using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System;
 using System.Data;
@@ -26,11 +26,7 @@ namespace BankManagementSystem.EmployeeDashboardForms
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
-            employee.Username = employee.Username;
-            employee.Nid = NidTextbox.Text;
-            employee.Address = AddresstextBox.Text;
-            employee.Eamil = EmailtextBox.Text.ToLower();
-            employee.Phone = PhoneTextBox.Text;
+            employee.Email = EmailtextBox.Text.ToLower();
             if (FormValidation())
             {
                 Visibility(false);
