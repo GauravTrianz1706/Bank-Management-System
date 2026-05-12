@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess;
+using BankDatabaseAccess;
 using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System;
@@ -105,10 +105,11 @@ namespace BankManagementSystem
             User.Username = UsernameTextbox.Text;
             User.FullName = FullNametextBox.Text;
             User.Password = PasswordTextbox.Text;
-            User.Eamil = EmailTextbox.Text.ToLower();
+            User.Email = EmailTextbox.Text.ToLower();
             User.Phone = PhoneTextBox.Text;
             User.Nid = Nidtextbox.Text;
             User.Address = AddressTextbox.Text;
+            
             if (ValidForm())
             {
                 if (UILogics.IsEmployee())

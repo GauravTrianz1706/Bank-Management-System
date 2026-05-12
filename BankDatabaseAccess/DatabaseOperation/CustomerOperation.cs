@@ -1,5 +1,4 @@
-﻿using BankDatabaseAccess.EntityModel;
-using System;
+using BankDatabaseAccess.EntityModel;
 
 namespace BankDatabaseAccess.DatabaseOperation
 {
@@ -18,7 +17,7 @@ namespace BankDatabaseAccess.DatabaseOperation
                           VALUES ('" + personModel.Username + "'," +
                           "'" + personModel.FullName + "'," +
                           "'" + personModel.Password + "'," +
-                          "'" + personModel.Eamil + "'," +
+                          "'" + personModel.Email + "'," +
                           "'" + personModel.Phone + "'," +
                           "'" + personModel.Nid + "'," +
                           "'" + personModel.Address + "'," +
@@ -43,7 +42,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         public int Update(PersonModel personModel)
         {
             var query = @"UPDATE dbo.[dbo.Customers] SET 
-                         Email = '" + personModel.Eamil + "'," +
+                         Email = '" + personModel.Email + "'," +
                          "Phone = '" + personModel.Phone + "'," +
                          "Nid = '" + personModel.Nid + "'," +
                          "Address = '" + personModel.Address + "'" +

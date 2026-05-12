@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.DatabaseOperation;
+using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System;
 using System.Data;
@@ -37,14 +37,9 @@ namespace BankManagementSystem.Dashboard_Forms
         }
         private void UpdateBtn_Click(object sender, System.EventArgs e)
         {
-            customer.Username = customer.Username;
-            customer.Nid = NidTextbox.Text;
-            customer.Address = AddresstextBox.Text;
-            customer.Eamil = EmailtextBox.Text.ToLower();
-            customer.Phone = PhoneTextBox.Text;
- 
             if (FormValidation())
             {
+                customer.Email = EmailtextBox.Text.ToLower();
                 Visibility(false);
                 UpdatedDB(new CustomerOperation().Update(customer));
                 UpdateBtn.Visible = false;

@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.DatabaseOperation;
+using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System;
 using System.Data;
@@ -52,16 +52,13 @@ namespace BankManagementSystem.EmployeeDashboardForms
 
         private void UpdateBtn_Click(object sender, EventArgs e)
         {
-            customer.Eamil = EmailTextbox.Text.ToLower();
-            customer.Phone = PhoneTextBox.Text;
-            customer.Nid = Nidtextbox.Text;
-            customer.Address = AddressTextbox.Text;
+            customer.Email = EmailTextbox.Text.ToLower();
             if (FormValidation())
             {
                 if (new EmployeeOperations().Update(customer) > 0)
                 {
                     MessageBox.Show($" {customer.Username} INFO Updated");
-                    ; ClearFilds();
+                    ClearFilds();
                 }
                 else
                 {
@@ -124,7 +121,7 @@ namespace BankManagementSystem.EmployeeDashboardForms
             {
                 customer.Phone = "N/A";
             }
-                if (string.IsNullOrEmpty(Nidtextbox.Text))
+            if (string.IsNullOrEmpty(Nidtextbox.Text))
             {
                 output = false;
             }

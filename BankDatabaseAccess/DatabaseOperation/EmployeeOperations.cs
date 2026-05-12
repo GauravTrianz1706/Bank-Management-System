@@ -1,10 +1,5 @@
-﻿using BankDatabaseAccess.EntityModel;
+using BankDatabaseAccess.EntityModel;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDatabaseAccess.DatabaseOperation
 {
@@ -21,7 +16,7 @@ namespace BankDatabaseAccess.DatabaseOperation
                           VALUES ('" + personModel.Username + "'," +
                           "'" + personModel.FullName + "'," +
                           "'" + personModel.Password + "'," +
-                          "'" + personModel.Eamil + "'," +
+                          "'" + personModel.Email + "'," +
                           "'" + personModel.Address + "'," +
                           "'" + personModel.Phone + "'," +
                           "'" + personModel.Nid + "'," +
@@ -47,7 +42,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         public int Update(PersonModel personModel)
         {
             var query = @"UPDATE dbo.[dbo.Customers] SET 
-                        Email = '" + personModel.Eamil + "'," +
+                        Email = '" + personModel.Email + "'," +
                         "Phone = '" + personModel.Phone + "'," +
                         "Address = '" + personModel.Address + "'," +
                         "Nid = '" + personModel.Nid + "'" +
@@ -63,7 +58,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         public int SelfUpdate(PersonModel personModel)
         {
             var query = @"UPDATE dbo.[dbo.Employee] SET 
-                        Email = '" + personModel.Eamil + "'," +
+                        Email = '" + personModel.Email + "'," +
                         "Phone = '" + personModel.Phone + "'," +
                         "Address = '" + personModel.Address + "'," +
                         "Nid = '" + personModel.Nid + "'" +
