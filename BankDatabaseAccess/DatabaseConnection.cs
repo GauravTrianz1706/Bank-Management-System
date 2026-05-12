@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
 
 namespace BankDatabaseAccess
 {
     public static class DatabaseConnection
     {
-        public static readonly string Connection = System.Configuration.ConfigurationManager.ConnectionStrings["OpenBankLocal"].ConnectionString;
+        public static string Connection { get; set; } = string.Empty;
 
-       public enum Error
+        public enum Error
         {
             UsernameExist = 4001
         }
@@ -27,9 +22,8 @@ namespace BankDatabaseAccess
                 }
                 catch (SqlException)
                 {
-                   return (int)Error.UsernameExist;
+                    return (int)Error.UsernameExist;
                 }
-
             }
         }
     }

@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess;
+using BankDatabaseAccess;
 using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System;
@@ -11,6 +11,7 @@ namespace BankManagementSystem
     public partial class RegistrationUI : Form
     {
         private readonly PersonModel User = new PersonModel();
+
         public RegistrationUI()
         {
             InitializeComponent();
@@ -24,6 +25,7 @@ namespace BankManagementSystem
                 Text = "Registration For Employee Account";
             }
         }
+
         #region Place Holder logics
         private void UsernameTextbox_Enter(object sender, EventArgs e)
         {
@@ -35,6 +37,7 @@ namespace BankManagementSystem
         {
             UILogics.LeaveUpdate(textBox: UsernameTextbox, placeholder: UsernamePlaceholder);
         }
+
         private void FullNametextBox_Enter(object sender, EventArgs e)
         {
             FullNametextBox.ForeColor = Color.Black;
@@ -45,6 +48,7 @@ namespace BankManagementSystem
         {
             UILogics.LeaveUpdate(textBox: FullNametextBox, placeholder: FullnamePlaceholder);
         }
+
         private void PasswordTextbox_Enter(object sender, EventArgs e)
         {
             PasswordTextbox.ForeColor = Color.Black;
@@ -100,6 +104,7 @@ namespace BankManagementSystem
             UILogics.LeaveUpdate(textBox: Nidtextbox, placeholder: NidPlaceholder);
         }
         #endregion
+
         private void RegistrationBtn_Click(object sender, EventArgs e)
         {
             User.Username = UsernameTextbox.Text;
@@ -123,6 +128,7 @@ namespace BankManagementSystem
             Close();
             new LoginUI().Show();
         }
+
         #region Form validation logics
         private bool ValidForm()
         {
@@ -141,11 +147,11 @@ namespace BankManagementSystem
             if (!UILogics.PasswordChekcer(PasswordTextbox) || PasswordTextbox.Text == PasswordPlaceholder)
             {
                 PasswordTextbox.ForeColor = Color.OrangeRed;
-                output = false; 
+                output = false;
             }
             try
             {
-                new MailAddress(EmailTextbox.Text); // return Exception if string doesnt contain '@' or and if string is empty 
+                new MailAddress(EmailTextbox.Text); // throws FormatException if invalid
             }
             catch (FormatException)
             {
@@ -153,7 +159,7 @@ namespace BankManagementSystem
                 output = false;
                 MessageBox.Show("Invalid Email Address");
             }
-            //if phone number not given store N/A to database
+            // if phone number not given store N/A to database
             if (string.IsNullOrEmpty(PhoneTextBox.Text) || PhoneTextBox.Text == PhonePlaceholder)
             {
                 User.Phone = "N/A";
@@ -181,13 +187,13 @@ namespace BankManagementSystem
             return output;
         }
         #endregion
+
         #region Message for Users
         private void UpdatedDB(int EffectedRow)
         {
             if (EffectedRow == (int)DatabaseConnection.Error.UsernameExist)
             {
                 MessageBox.Show("Username Already Exist!");
-
             }
             else if (EffectedRow > 0)
             {
@@ -201,6 +207,7 @@ namespace BankManagementSystem
             }
         }
         #endregion
+
         #region placeholder strings
         private const string UsernamePlaceholder = "Enter a Username";
         private const string FullnamePlaceholder = "Enter Your Full Name";
