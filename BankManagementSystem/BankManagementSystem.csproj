@@ -38,8 +38,12 @@
 
   <ItemGroup>
     <!-- NuGet packages updated to .NET 8 compatible versions -->
+    <!-- CHANGED: Removed Microsoft.EntityFrameworkCore.SqlServer; added PostgreSQL packages -->
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Npgsql" Version="8.0.5" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+    <PackageReference Include="EFCore.NamingConventions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="log4net" Version="2.0.15" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
