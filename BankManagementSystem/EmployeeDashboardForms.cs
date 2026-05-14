@@ -1,20 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+// EmployeeDashboardForms.cs - Stub form retained for Designer compatibility.
+// This partial class pairs with EmployeeDashboardForms.Designer.cs (Form1).
+// It is a legacy stub and is not instantiated by the application.
 
-namespace BankManagementSystem
-{
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-        }
     }
 }

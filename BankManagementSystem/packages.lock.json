@@ -1,23 +1,43 @@
 {
-  "version": 1,
+  "version": 2,
   "dependencies": {
-    "Newtonsoft.Json": {
-      "type": "Direct",
-      "requested": "12.0.1",
-      "resolved": "12.0.1",
-      "contentHash": "fakehash"
-    },
-    "log4net": {
-      "type": "Direct",
-      "requested": "2.0.8",
-      "resolved": "2.0.8",
-      "contentHash": "fakehash"
-    },
-    "HtmlAgilityPack": {
-      "type": "Direct",
-      "requested": "1.8.11",
-      "resolved": "1.8.11",
-      "contentHash": "fakehash"
+    "net8.0-windows": {
+      "Microsoft.EntityFrameworkCore": {
+        "type": "Direct",
+        "requested": "[8.0.0, )",
+        "resolved": "8.0.0",
+        "contentHash": "net8-efcore-8.0.0"
+      },
+      "Microsoft.EntityFrameworkCore.SqlServer": {
+        "type": "Direct",
+        "requested": "[8.0.0, )",
+        "resolved": "8.0.0",
+        "contentHash": "net8-efcore-sqlserver-8.0.0"
+      },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[13.0.3, )",
+        "resolved": "13.0.3",
+        "contentHash": "net8-newtonsoft-13.0.3"
+      },
+      "log4net": {
+        "type": "Direct",
+        "requested": "[2.0.15, )",
+        "resolved": "2.0.15",
+        "contentHash": "net8-log4net-2.0.15"
+      },
+      "HtmlAgilityPack": {
+        "type": "Direct",
+        "requested": "[1.11.61, )",
+        "resolved": "1.11.61",
+        "contentHash": "net8-htmlagilitypack-1.11.61"
+      },
+      "Newtonsoft.Json.Bson": {
+        "type": "Direct",
+        "requested": "[1.0.3, )",
+        "resolved": "1.0.3",
+        "contentHash": "net8-newtonsoft-bson-1.0.3"
+      }
     }
   }
 }

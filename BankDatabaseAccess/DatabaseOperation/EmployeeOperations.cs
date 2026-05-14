@@ -1,10 +1,4 @@
-﻿using BankDatabaseAccess.EntityModel;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BankDatabaseAccess.EntityModel;
 
 namespace BankDatabaseAccess.DatabaseOperation
 {
@@ -26,8 +20,9 @@ namespace BankDatabaseAccess.DatabaseOperation
                           "'" + personModel.Phone + "'," +
                           "'" + personModel.Nid + "'," +
                           "'" + new Random().Next(30000, 1000000).ToString() + "')"; // generates Salary from 30k to 100k
-                          return DatabaseConnection.Execute(query);
+            return DatabaseConnection.Execute(query);
         }
+
         /// <summary>
         /// This method is use for Deleting an existing Customer account form dashboard
         /// </summary>
@@ -36,9 +31,10 @@ namespace BankDatabaseAccess.DatabaseOperation
         public int Delete(PersonModel personModel)
         {
             var query = @"DELETE FROM dbo.[dbo.Customers] 
-                        WHERE Username = '" + personModel.Username +"'";
+                        WHERE Username = '" + personModel.Username + "'";
             return DatabaseConnection.Execute(query);
         }
+
         /// <summary>
         /// THis method is use for update an existing Customer Account from dashboard
         /// </summary>
@@ -55,6 +51,7 @@ namespace BankDatabaseAccess.DatabaseOperation
 
             return DatabaseConnection.Execute(query);
         }
+
         /// <summary>
         /// Update Employee's data from db
         /// </summary>
@@ -67,7 +64,7 @@ namespace BankDatabaseAccess.DatabaseOperation
                         "Phone = '" + personModel.Phone + "'," +
                         "Address = '" + personModel.Address + "'," +
                         "Nid = '" + personModel.Nid + "'" +
-                        "WHERE Username = '"+ personModel.Username +"'";
+                        "WHERE Username = '" + personModel.Username + "'";
             return DatabaseConnection.Execute(query);
         }
     }

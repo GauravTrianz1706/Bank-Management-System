@@ -1,19 +1,21 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{E43A2363-B317-43CA-AAA6-E2B3EEA26FE4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>BankManagementSystem</RootNamespace>
     <AssemblyName>BankManagementSystem</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
     <Deterministic>true</Deterministic>
+    <Platforms>AnyCPU</Platforms>
+    <Configurations>Debug;Release</Configurations>
+    <!-- Restore locked mode disabled to allow package resolution on .NET 8 -->
+    <RestoreLockedMode>false</RestoreLockedMode>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -23,7 +25,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -32,182 +35,36 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Management" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <!-- NuGet packages updated to .NET 8 compatible versions -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="log4net" Version="2.0.15" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3" />
+    <!-- System.Configuration.ConfigurationManager required for Settings.Designer.cs (ApplicationSettingsBase) -->
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+    <!--
+      Microsoft.AspNetCore.App is a built-in shared framework reference in .NET 8.
+      It is NOT referenced as a NuGet PackageReference in .NET 8 projects.
+      If ASP.NET Core features are needed, use:
+        <FrameworkReference Include="Microsoft.AspNetCore.App" />
+      System.Messaging (MSMQ) is NOT available on .NET 8; removed entirely.
+    -->
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="CutomerDashboardForms\Transfer.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CutomerDashboardForms\Transfer.Designer.cs">
-      <DependentUpon>Transfer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CutomerDashboardForms\Home.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CutomerDashboardForms\Home.Designer.cs">
-      <DependentUpon>Home.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CutomerDashboardForms\Withdraw.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CutomerDashboardForms\Withdraw.Designer.cs">
-      <DependentUpon>Withdraw.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CustomerDashBoard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CustomerDashBoard.Designer.cs">
-      <DependentUpon>CustomerDashBoard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EmployeeDashBoard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EmployeeDashBoard.Designer.cs">
-      <DependentUpon>EmployeeDashBoard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EmployeeDashboardForms\CustomerInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EmployeeDashboardForms\CustomerInfo.Designer.cs">
-      <DependentUpon>CustomerInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EmployeeDashboardForms\Deposit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EmployeeDashboardForms\Deposit.Designer.cs">
-      <DependentUpon>Deposit.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EmployeeDashboardForms\EditInfo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EmployeeDashboardForms\EditInfo.Designer.cs">
-      <DependentUpon>EditInfo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="EmployeeDashboardForms\Home.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="EmployeeDashboardForms\Home.Designer.cs">
-      <DependentUpon>Home.cs</DependentUpon>
-    </Compile>
-    <Compile Include="WelcomeUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WelcomeUI.Designer.cs">
-      <DependentUpon>WelcomeUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="RegistrationUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="RegistrationUI.Designer.cs">
-      <DependentUpon>RegistrationUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="LoginUI.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LoginUI.Designer.cs">
-      <DependentUpon>LoginUI.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UILogics.cs" />
-    <EmbeddedResource Include="CutomerDashboardForms\Transfer.resx">
-      <DependentUpon>Transfer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CutomerDashboardForms\Home.resx">
-      <DependentUpon>Home.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CutomerDashboardForms\Withdraw.resx">
-      <DependentUpon>Withdraw.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomerDashBoard.resx">
-      <DependentUpon>CustomerDashBoard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeDashBoard.resx">
-      <DependentUpon>EmployeeDashBoard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeDashboardForms\CustomerInfo.resx">
-      <DependentUpon>CustomerInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeDashboardForms\Deposit.resx">
-      <DependentUpon>Deposit.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeDashboardForms\EditInfo.resx">
-      <DependentUpon>EditInfo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EmployeeDashboardForms\Home.resx">
-      <DependentUpon>Home.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LoginUI.resx">
-      <DependentUpon>LoginUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <SubType>Designer</SubType>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RegistrationUI.resx">
-      <DependentUpon>RegistrationUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="WelcomeUI.resx">
-      <DependentUpon>WelcomeUI.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
+    <ProjectReference Include="..\BankDatabaseAccess\BankDatabaseAccess.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
+
   <ItemGroup>
     <None Include="Resources\Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\dpHolder.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\cardHolder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BankDatabaseAccess\BankDatabaseAccess.csproj">
-      <Project>{83583728-a1aa-4e28-87eb-4c7fa1a9f350}</Project>
-      <Name>BankDatabaseAccess</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\getStarted_.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\gitIcon.png" />
   </ItemGroup>
-  <ItemGroup>
-  <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-  <PackageReference Include="log4net" Version="2.0.8" />
-  <PackageReference Include="HtmlAgilityPack" Version="1.8.11" />
-  <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.1" />
-</ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
 </Project>

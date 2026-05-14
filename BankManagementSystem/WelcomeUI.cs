@@ -1,4 +1,11 @@
-﻿using System;
+// WelcomeUI.cs - Updated for .NET 8 compatibility
+// CHANGES:
+//   - Updated Process.Start() call to use ProcessStartInfo with UseShellExecute = true.
+//     In .NET Core/.NET 5+, Process.Start(string) for URLs requires UseShellExecute = true
+//     explicitly; the default changed from true to false in .NET Core.
+//     Without this fix, opening a URL via Process.Start throws an exception on .NET 8.
+
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -41,6 +48,17 @@ namespace BankManagementSystem
             GetStartedBtn.Size = new Size(175, 65);
         }
 
-        private void GitBtn_Click(object sender, EventArgs e) => Process.Start(new ProcessStartInfo("https://github.com/b14ck0ps/Bank-Management-System"));
+        private void GitBtn_Click(object sender, EventArgs e)
+        {
+            // CHANGED: Process.Start(string) → Process.Start(ProcessStartInfo) with
+            // UseShellExecute = true. Required for URL launching in .NET 5+/.NET 8.
+            // In .NET Core, UseShellExecute defaults to false, which causes an exception
+            // when trying to open a URL without specifying a shell executable.
+            Process.Start(new ProcessStartInfo(
+                "https://github.com/b14ck0ps/Bank-Management-System")
+            {
+                UseShellExecute = true
+            });
+        }
     }
 }

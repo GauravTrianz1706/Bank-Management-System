@@ -1,17 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace BankDatabaseAccess
 {
     public static class DatabaseConnection
     {
-        public static readonly string Connection = System.Configuration.ConfigurationManager.ConnectionStrings["OpenBankLocal"].ConnectionString;
+        private static readonly IConfiguration _configuration;
 
-       public enum Error
+        static DatabaseConnection()
+        {
+            _configuration = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .Build();
+        }
+
+        public static readonly string Connection = _configuration.GetConnectionString("OpenBankLocal") ?? string.Empty;
+
+        public enum Error
         {
             UsernameExist = 4001
         }
@@ -27,9 +33,8 @@ namespace BankDatabaseAccess
                 }
                 catch (SqlException)
                 {
-                   return (int)Error.UsernameExist;
+                    return (int)Error.UsernameExist;
                 }
-
             }
         }
     }
