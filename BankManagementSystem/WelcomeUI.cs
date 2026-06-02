@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -41,6 +41,12 @@ namespace BankManagementSystem
             GetStartedBtn.Size = new Size(175, 65);
         }
 
-        private void GitBtn_Click(object sender, EventArgs e) => Process.Start(new ProcessStartInfo("https://github.com/b14ck0ps/Bank-Management-System"));
+        // NOTE: Process.Start with a URL string requires UseShellExecute = true in .NET 8.
+        // Updated to use ProcessStartInfo with UseShellExecute = true.
+        private void GitBtn_Click(object sender, EventArgs e) =>
+            Process.Start(new ProcessStartInfo("https://github.com/b14ck0ps/Bank-Management-System")
+            {
+                UseShellExecute = true
+            });
     }
 }

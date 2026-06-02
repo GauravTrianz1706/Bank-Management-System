@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.EntityModel;
+using BankDatabaseAccess.EntityModel;
 using BankDatabaseAccess.DatabaseOperation;
 using System;
 using System.Windows.Forms;
@@ -20,12 +20,12 @@ namespace BankManagementSystem
             {
                 Text = "Log In as Employee";
             }
-            
         }
+
         #region place holder logics
         private void UsernameTextbox_Enter(object sender, EventArgs e)
         {
-            UILogics.EnterUpdate(textBox:UsernameTextbox,placeholder: UsernamePalceholder);
+            UILogics.EnterUpdate(textBox: UsernameTextbox, placeholder: UsernamePalceholder);
         }
 
         private void UsernameTextbox_Leave(object sender, EventArgs e)
@@ -37,9 +37,8 @@ namespace BankManagementSystem
         {
             UILogics.EnterUpdate(textBox: PasswordTextbox, placeholder: PasswordPalceholder);
             PasswordTextbox.PasswordChar = '*';
-
         }
-        
+
         private void PasswordTextbox_Leave(object sender, EventArgs e)
         {
             if (PasswordTextbox.Text == "")
@@ -47,19 +46,16 @@ namespace BankManagementSystem
                 PasswordTextbox.PasswordChar = '\0';
             }
             UILogics.LeaveUpdate(textBox: PasswordTextbox, placeholder: PasswordPalceholder);
-
         }
-
         #endregion
 
         private void LoginBtn_Click(object sender, EventArgs e)
         {
-             DataTable data;
-             string username, password;
+            DataTable data;
+            string username, password;
 
             if (UILogics.IsCustomer())
             {
-                
                 PersonModel customerModel = new CustomerModel
                 {
                     Username = UsernameTextbox.Text,
@@ -67,9 +63,9 @@ namespace BankManagementSystem
                 };
                 try
                 {
-                     data = new DataReader().GetSingleData(customerModel, UILogics.IsCustomer(), UILogics.IsEmployee());
-                     username = data.Rows[0][0].ToString();
-                     password = data.Rows[0][8].ToString();
+                    data = new DataReader().GetSingleData(customerModel, UILogics.IsCustomer(), UILogics.IsEmployee());
+                    username = data.Rows[0][0].ToString()!;
+                    password = data.Rows[0][8].ToString()!;
                     if (Authentication(username, password))
                     {
                         new CustomerDashBoard(customerModel).Show();
@@ -82,10 +78,8 @@ namespace BankManagementSystem
                 }
                 catch (Exception)
                 {
-
                     MessageBox.Show(error);
                 }
-                    
             }
 
             if (UILogics.IsEmployee())
@@ -98,8 +92,8 @@ namespace BankManagementSystem
                 try
                 {
                     data = new DataReader().GetSingleData(EmployeeModel, UILogics.IsCustomer(), UILogics.IsEmployee());
-                    username = data.Rows[0][0].ToString();
-                    password = data.Rows[0][7].ToString();
+                    username = data.Rows[0][0].ToString()!;
+                    password = data.Rows[0][7].ToString()!;
                     if (Authentication(username, password))
                     {
                         new EmployeeDashBoard(EmployeeModel).Show();
@@ -112,13 +106,9 @@ namespace BankManagementSystem
                 }
                 catch (Exception)
                 {
-
                     MessageBox.Show(error);
                 }
-                 
-                    
             }
-            
         }
 
         private void LnkRegistration_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -143,7 +133,7 @@ namespace BankManagementSystem
         {
             if (UsernameTextbox.Text == Username && PasswordTextbox.Text == Password)
                 return true;
-           else
+            else
                 return false;
         }
 

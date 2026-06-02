@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess;
+using BankDatabaseAccess;
 using BankDatabaseAccess.DatabaseOperation;
 using BankDatabaseAccess.EntityModel;
 using System;
@@ -141,11 +141,13 @@ namespace BankManagementSystem
             if (!UILogics.PasswordChekcer(PasswordTextbox) || PasswordTextbox.Text == PasswordPlaceholder)
             {
                 PasswordTextbox.ForeColor = Color.OrangeRed;
-                output = false; 
+                output = false;
             }
             try
             {
-                new MailAddress(EmailTextbox.Text); // return Exception if string doesnt contain '@' or and if string is empty 
+                // MailAddress constructor throws FormatException for invalid addresses.
+                // This API is still available in .NET 8.
+                new MailAddress(EmailTextbox.Text);
             }
             catch (FormatException)
             {
@@ -187,7 +189,6 @@ namespace BankManagementSystem
             if (EffectedRow == (int)DatabaseConnection.Error.UsernameExist)
             {
                 MessageBox.Show("Username Already Exist!");
-
             }
             else if (EffectedRow > 0)
             {
