@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using System.Data;
 
 namespace BankDatabaseAccess.DatabaseOperation
@@ -9,7 +9,7 @@ namespace BankDatabaseAccess.DatabaseOperation
 
         private DataTable DataTable()
         {
-            SqlDataAdapter adapter = new SqlDataAdapter(query, DatabaseConnection.Connection);
+            NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(query, DatabaseConnection.Connection);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);
             return dataTable;
@@ -25,8 +25,8 @@ namespace BankDatabaseAccess.DatabaseOperation
         public DataTable GetSingleData(EntityModel.PersonModel personModel, bool customer, bool employee)
         {
             query = @"SELECT * 
-                        FROM dbo.[dbo." + Table(customer, employee) + "] " +
-                        "WHERE Username =  '" + personModel.Username + "'";
+                        FROM public." + Table(customer, employee) + " " +
+                        "WHERE username = '" + personModel.Username + "'";
             return DataTable();
         }
 
@@ -39,14 +39,14 @@ namespace BankDatabaseAccess.DatabaseOperation
         public DataTable GetAllData(bool customer = false, bool employee = false)
         {
             query = @"SELECT 
-                         [FullName] AS 'Full Name'
-                        ,[Email] AS 'Email Address'
-                        ,[Phone] AS 'Phone Number'
-                        ,[Nid] AS 'National ID'
-                        ,[Balance] AS Balance
-                        ,[Address] AS Address
-                        ,[JoinDate] AS 'Account Created'
-                    FROM dbo.[dbo." + Table(customer, employee) + "]";
+                         full_name AS ""Full Name""
+                        ,email AS ""Email Address""
+                        ,phone AS ""Phone Number""
+                        ,nid AS ""National ID""
+                        ,balance AS balance
+                        ,address AS address
+                        ,join_date AS ""Account Created""
+                    FROM public." + Table(customer, employee);
             return DataTable();
         }
 
@@ -59,9 +59,9 @@ namespace BankDatabaseAccess.DatabaseOperation
         private static string? Table(bool customer, bool employee)
         {
             if (customer)
-                return "Customers";
+                return "customers";
             if (employee)
-                return "Employee";
+                return "employee";
             return null;
         }
     }

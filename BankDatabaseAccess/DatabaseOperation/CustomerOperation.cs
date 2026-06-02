@@ -13,7 +13,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Return Row Number</returns>
         public int Insert(PersonModel personModel)
         {
-            var query = @"INSERT INTO dbo.[dbo.Customers](Username,Fullname,Password,Email,Phone,Nid,Address,Balance) 
+            var query = @"INSERT INTO public.customers(username, full_name, password, email, phone, nid, address, balance) 
                           VALUES ('" + personModel.Username + "'," +
                           "'" + personModel.FullName + "'," +
                           "'" + personModel.Password + "'," +
@@ -42,12 +42,12 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>row effect</returns>
         public int Update(PersonModel personModel)
         {
-            var query = @"UPDATE dbo.[dbo.Customers] SET 
-                         Email = '" + personModel.Eamil + "'," +
-                         "Phone = '" + personModel.Phone + "'," +
-                         "Nid = '" + personModel.Nid + "'," +
-                         "Address = '" + personModel.Address + "'" +
-                         " WHERE '" + personModel.Username + "' = Username";
+            var query = @"UPDATE public.customers SET 
+                         email = '" + personModel.Eamil + "'," +
+                         "phone = '" + personModel.Phone + "'," +
+                         "nid = '" + personModel.Nid + "'," +
+                         "address = '" + personModel.Address + "'" +
+                         " WHERE username = '" + personModel.Username + "'";
             return DatabaseConnection.Execute(query);
         }
 
@@ -59,9 +59,9 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>row effected</returns>
         public int UpdateBalance(PersonModel personModel, decimal amount)
         {
-            var query = @"UPDATE dbo.[dbo.Customers] SET 
-                        Balance = '" + amount + "'" +
-                         " WHERE Username = '" + personModel.Username + "'";
+            var query = @"UPDATE public.customers SET 
+                        balance = '" + amount + "'" +
+                         " WHERE username = '" + personModel.Username + "'";
             return DatabaseConnection.Execute(query);
         }
     }

@@ -1,6 +1,8 @@
 using System;
 using System.Security.Principal;
 using System.Windows.Forms;
+using Microsoft.Extensions.Configuration;
+using BankDatabaseAccess;
 
 namespace BankManagementSystem
 {
@@ -19,6 +21,15 @@ namespace BankManagementSystem
             {
                 throw new InvalidOperationException("Interactive session required.");
             }
+
+            // Configure PostgreSQL connection string from appsettings.json
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(AppContext.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
+                .Build();
+
+            // Initialize DatabaseConnection with PostgreSQL configuration
+            DatabaseConnection.Configure(configuration);
 
             // .NET 8 WinForms: ApplicationConfiguration.Initialize() replaces
             // EnableVisualStyles() + SetCompatibleTextRenderingDefault(false)

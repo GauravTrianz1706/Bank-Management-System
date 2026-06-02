@@ -1,4 +1,4 @@
-using Microsoft.Data.SqlClient;
+using Npgsql;
 using Microsoft.Extensions.Configuration;
 
 namespace BankDatabaseAccess
@@ -34,13 +34,13 @@ namespace BankDatabaseAccess
 
         public static int Execute(string query)
         {
-            using var connection = new SqlConnection(Connection);
+            using var connection = new NpgsqlConnection(Connection);
             try
             {
                 connection.Open();
-                return new SqlCommand(query, connection).ExecuteNonQuery();
+                return new NpgsqlCommand(query, connection).ExecuteNonQuery();
             }
-            catch (SqlException)
+            catch (NpgsqlException)
             {
                 return (int)Error.UsernameExist;
             }

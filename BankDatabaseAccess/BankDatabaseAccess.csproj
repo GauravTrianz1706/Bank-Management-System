@@ -13,12 +13,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <!-- Microsoft.Data.SqlClient 5.2.1 - compatible with .NET 8 -->
-    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.1" />
-    <!-- Microsoft.EntityFrameworkCore 8.0.0 - updated from 6.0.0 for .NET 8 compatibility -->
+    <!-- Npgsql 8.0.5 - PostgreSQL ADO.NET provider for .NET 8 -->
+    <PackageReference Include="Npgsql" Version="8.0.5" />
+    <!-- Npgsql.EntityFrameworkCore.PostgreSQL 8.0.0 - EF Core provider for PostgreSQL -->
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+    <!-- EFCore.NamingConventions 8.0.0 - snake_case naming convention support -->
+    <PackageReference Include="EFCore.NamingConventions" Version="8.0.0" />
+    <!-- Microsoft.EntityFrameworkCore 8.0.0 - EF Core base package -->
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
-    <!-- Microsoft.EntityFrameworkCore.SqlServer 8.0.0 - updated for .NET 8 compatibility -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <!-- Microsoft.EntityFrameworkCore.Relational 8.0.0 - EF Core relational support -->
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
     <!-- Microsoft.Extensions.Configuration.Abstractions 8.0.0 - aligned with .NET 8 -->
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
     <!-- Newtonsoft.Json 13.0.3 - latest stable, .NET 8 compatible -->

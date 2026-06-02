@@ -24,6 +24,8 @@
     <PackageReference Include="HtmlAgilityPack" Version="1.11.61" />
     <!-- Newtonsoft.Json.Bson 1.0.3 - .NET 8 compatible -->
     <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.3" />
+    <!-- Microsoft.Extensions.Configuration.Json for appsettings.json support -->
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -36,6 +38,10 @@
     <None Include="Resources\cardHolder.png" />
     <None Include="Resources\getStarted_.png" />
     <None Include="Resources\gitIcon.png" />
+    <!-- Include appsettings.json in output directory -->
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
