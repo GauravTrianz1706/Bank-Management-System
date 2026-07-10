@@ -1,5 +1,5 @@
 using BankDatabaseAccess.EntityModel;
-using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -17,8 +17,13 @@ namespace BankManagementSystem
             personModel = customer;
             InitializeComponent();
 
-           
-            Registry.CurrentUser.OpenSubKey(@"Software\BankApp");
+            // CONTAINERIZATION FIX: Replaced Windows Registry access (Registry.CurrentUser.OpenSubKey)
+            // with environment variable for cross-platform compatibility
+            // Blocker IDs: blocker-4, blocker-5 (cz-dotnet-0002 - Registry Access)
+            // In production, use Azure App Configuration for centralized, cloud-native configuration
+            // with feature flags, key-value pairs, and dynamic updates without pod restarts
+            string appConfig = Environment.GetEnvironmentVariable("BANK_APP_CONFIG") 
+                ?? "default-config";
         }
     }
 }

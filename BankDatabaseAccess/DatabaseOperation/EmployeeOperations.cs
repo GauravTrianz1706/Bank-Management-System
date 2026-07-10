@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.EntityModel;
+using BankDatabaseAccess.EntityModel;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,11 +17,11 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Returns Row Number</returns>
         public int Insert(PersonModel personModel)
         {
-            var query = @"INSERT INTO dbo.[dbo.Employee](Username,FullName,Password,Email,Address,Phone,Nid,Salary) 
+            var query = @"INSERT INTO [dbo].[Employee](Username,FullName,Password,Email,Address,Phone,Nid,Salary) 
                           VALUES ('" + personModel.Username + "'," +
                           "'" + personModel.FullName + "'," +
                           "'" + personModel.Password + "'," +
-                          "'" + personModel.Eamil + "'," +
+                          "'" + personModel.Email + "'," +
                           "'" + personModel.Address + "'," +
                           "'" + personModel.Phone + "'," +
                           "'" + personModel.Nid + "'," +
@@ -35,7 +35,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Returns Row Number</returns>
         public int Delete(PersonModel personModel)
         {
-            var query = @"DELETE FROM dbo.[dbo.Customers] 
+            var query = @"DELETE FROM [dbo].[Customers] 
                         WHERE Username = '" + personModel.Username +"'";
             return DatabaseConnection.Execute(query);
         }
@@ -46,8 +46,8 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Returns Row Number</returns>
         public int Update(PersonModel personModel)
         {
-            var query = @"UPDATE dbo.[dbo.Customers] SET 
-                        Email = '" + personModel.Eamil + "'," +
+            var query = @"UPDATE [dbo].[Customers] SET 
+                        Email = '" + personModel.Email + "'," +
                         "Phone = '" + personModel.Phone + "'," +
                         "Address = '" + personModel.Address + "'," +
                         "Nid = '" + personModel.Nid + "'" +
@@ -62,8 +62,8 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns></returns>
         public int SelfUpdate(PersonModel personModel)
         {
-            var query = @"UPDATE dbo.[dbo.Employee] SET 
-                        Email = '" + personModel.Eamil + "'," +
+            var query = @"UPDATE [dbo].[Employee] SET 
+                        Email = '" + personModel.Email + "'," +
                         "Phone = '" + personModel.Phone + "'," +
                         "Address = '" + personModel.Address + "'," +
                         "Nid = '" + personModel.Nid + "'" +

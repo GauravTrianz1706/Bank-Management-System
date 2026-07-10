@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: bankmanagementsystem
+  labels:
+    name: bankmanagementsystem
+    environment: production
+    app: bankmanagementsystem

@@ -1,4 +1,5 @@
-﻿using System;
+using BankDatabaseAccess.EntityModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,26 +7,27 @@ using System.Threading.Tasks;
 
 namespace BankDatabaseAccess.DatabaseOperation
 {
-    interface IOperations
+    public interface IOperations
     {
         /// <summary>
-        /// Insert Data to the database
+        /// Insert data to database
         /// </summary>
         /// <param name="personModel">Customer or Employee Model</param>
         /// <returns></returns>
-        int Insert(EntityModel.PersonModel personModel);
+        int Insert(PersonModel personModel);
+        
         /// <summary>
-        /// Update data from databse
+        /// Update data from database
         /// </summary>
         /// <param name="personModel">Customer or Employee Model</param>
         /// <returns></returns>
-        int Update(EntityModel.PersonModel personModel);
+        int Update(PersonModel personModel);
+        
         /// <summary>
         /// Delete data from database
         /// </summary>
         /// <param name="personModel">Customer or Employee Model</param>
         /// <returns></returns>
-        int Delete(EntityModel.PersonModel personModel);
-
+        int Delete(PersonModel personModel);
     }
 }

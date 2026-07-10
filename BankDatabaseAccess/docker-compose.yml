@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  bankdatabaseaccess:
+    image: bankdatabaseaccess:latest
+    container_name: bankdatabaseaccess
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      # .NET Configuration
+      - DOTNET_ENVIRONMENT=Production
+      - DOTNET_RUNNING_IN_CONTAINER=true
+      
+      # Database Configuration (SQL Server)
+      # Replace these with your actual database connection details
+      - DATABASE_SERVER=${DATABASE_SERVER:-sqlserver}
+      - DATABASE_NAME=${DATABASE_NAME:-BankDB}
+      - DATABASE_USER=${DATABASE_USER:-sa}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD:-YourStrong@Passw0rd}
+      - CONNECTION_STRING=Server=${DATABASE_SERVER:-sqlserver};Database=${DATABASE_NAME:-BankDB};User Id=${DATABASE_USER:-sa};Password=${DATABASE_PASSWORD:-YourStrong@Passw0rd};TrustServerCertificate=True;
+      
+      # Logging Configuration
+      - LOG_LEVEL=${LOG_LEVEL:-Information}
+      - LOG4NET_CONFIG=/app/config/log4net.config
+      
+      # Application Settings
+      - TZ=UTC
+      
+    volumes:
+      # Mount configuration files
+      - ./config:/app/config:ro
+      # Mount logs directory
+      - ./logs:/app/logs
+      
+    networks:
+      - bank-network
+    
+    restart: unless-stopped
+    
+    # Health check (if applicable for library usage)
+    healthcheck:
+      test: ["CMD-SHELL", "test -f /app/BankDatabaseAccess.dll || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  bank-network:
+    driver: bridge
+    name: bank-network
+
+# Note: This is a class library project
+# In production, this should be deployed as part of the main application
+# External services (SQL Server, etc.) should be provided separately

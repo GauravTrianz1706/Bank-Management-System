@@ -1,4 +1,4 @@
-﻿using BankDatabaseAccess.EntityModel;
+using BankDatabaseAccess.EntityModel;
 using System;
 
 namespace BankDatabaseAccess.DatabaseOperation
@@ -14,15 +14,15 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>Return Row Number</returns>
         public int Insert(PersonModel personModel)
         {
-            var query = @"INSERT INTO dbo.[dbo.Customers](Username,Fullname,Password,Email,Phone,Nid,Address,Balance) 
+            var query = @"INSERT INTO [dbo].[Customers](Username,Fullname,Password,Email,Phone,Nid,Address,Balance) 
                           VALUES ('" + personModel.Username + "'," +
                           "'" + personModel.FullName + "'," +
                           "'" + personModel.Password + "'," +
-                          "'" + personModel.Eamil + "'," +
+                          "'" + personModel.Email + "'," +
                           "'" + personModel.Phone + "'," +
                           "'" + personModel.Nid + "'," +
                           "'" + personModel.Address + "'," +
-                          "'" + InitialBalance + "')"; // Set Opening Balance 1000 taka for all customers
+                          "'" + InitialBalance + "')"; // Set Opening Balance 100 for all customers
             return DatabaseConnection.Execute(query);
         }
         /// <summary>
@@ -42,12 +42,12 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>row effect</returns>
         public int Update(PersonModel personModel)
         {
-            var query = @"UPDATE dbo.[dbo.Customers] SET 
-                         Email = '" + personModel.Eamil + "'," +
+            var query = @"UPDATE [dbo].[Customers] SET 
+                         Email = '" + personModel.Email + "'," +
                          "Phone = '" + personModel.Phone + "'," +
                          "Nid = '" + personModel.Nid + "'," +
                          "Address = '" + personModel.Address + "'" +
-                         " WHERE '" + personModel.Username + "' = Username"; ;
+                         " WHERE Username = '" + personModel.Username + "'";
             return DatabaseConnection.Execute(query);
         }
         /// <summary>
@@ -58,7 +58,7 @@ namespace BankDatabaseAccess.DatabaseOperation
         /// <returns>row effected</returns>
         public int UpdateBalance(PersonModel personModel, decimal amount)
         {
-            var query = @"UPDATE dbo.[dbo.Customers] SET 
+            var query = @"UPDATE [dbo].[Customers] SET 
                         Balance = '" + amount + "'" +
                          " WHERE Username = '" + personModel.Username +"'";
             return DatabaseConnection.Execute(query);

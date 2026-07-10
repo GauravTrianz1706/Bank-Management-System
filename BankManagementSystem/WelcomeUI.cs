@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -41,6 +41,9 @@ namespace BankManagementSystem
             GetStartedBtn.Size = new Size(175, 65);
         }
 
+        // NOTE: Blocker-9 (cz-dotnet-0006) flagged this line as having drive letter dependencies,
+        // but this is a false positive - it's just opening a URL, not accessing a Windows drive
+        // No containerization fix needed here
         private void GitBtn_Click(object sender, EventArgs e) => Process.Start(new ProcessStartInfo("https://github.com/b14ck0ps/Bank-Management-System"));
     }
 }

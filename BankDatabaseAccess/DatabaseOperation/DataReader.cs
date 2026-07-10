@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+using BankDatabaseAccess.EntityModel;
+using System.Data.SqlClient;
 using System.Data;
 
 namespace BankDatabaseAccess.DatabaseOperation
@@ -6,46 +7,48 @@ namespace BankDatabaseAccess.DatabaseOperation
     public class DataReader
     {
         private string query = "--";
-        private  DataTable DataTable()
+        
+        private DataTable DataTable()
         {
             SqlDataAdapter adapter = new SqlDataAdapter(query, DatabaseConnection.Connection);
             DataTable dataTable = new DataTable();
             adapter.Fill(dataTable);
             return dataTable;
         }
+        
         /// <summary>
-        /// This method read data from the data base
+        /// This method read data from the database
         /// </summary>
         /// <param name="personModel">Enter a person model ie. Employee or Customer</param>
         /// <param name="customer">This is true if customer data needed</param>
-        /// <param name="employee">This is true if eployee data nedded</param>
+        /// <param name="employee">This is true if employee data needed</param>
         /// <returns>This return a datatable of the given object from the database</returns>
-        public DataTable GetSingleData(EntityModel.PersonModel personModel,bool customer,bool employee)
+        public DataTable GetSingleData(PersonModel personModel, bool customer = false, bool employee = false)
         {
-            query = @"SELECT * 
-                        FROM dbo.[dbo."+ Table(customer,employee) +"] " +
-                        "WHERE Username =  '"+ personModel.Username +"'";
+            query = @"SELECT * FROM [dbo].[" + Table(customer, employee) + "] " +
+                    "WHERE Username = '" + personModel.Username + "'";
             return DataTable();
         }
+        
         /// <summary>
-        /// This method read the whole data from a table exept Passwords
+        /// This method read the whole data from a table except Passwords
         /// </summary>
         /// <param name="customer">Set True if Customer data table needed</param>
-        /// <param name="employee">Set True id Employee data needed</param>
-        /// <returns>Return all Coloumns and rows from the table</returns>
+        /// <param name="employee">Set True if Employee data needed</param>
+        /// <returns>Return all Columns and rows from the table</returns>
         public DataTable GetAllData(bool customer = false, bool employee = false)
         {
-                query = @"SELECT 
-                             [FullName] AS 'Full Name'
-                            ,[Email] AS 'Email Address'
-                            ,[Phone] AS 'Phone Number'
-                            ,[Nid] AS 'National ID'
-                            ,[Balance] AS Balance
-                            ,[Address] AS Address
-                            ,[JoinDate] AS 'Account Created'
-                        FROM dbo.[dbo." + Table(customer,employee) +"]";
+            query = @"SELECT 
+                         [Username] AS 'Username'
+                        ,[FullName] AS 'Full Name'
+                        ,[Email] AS 'Email Address'
+                        ,[Phone] AS 'Phone Number'
+                        ,[Nid] AS 'National ID'
+                        ,[Address] AS 'Address'
+                    FROM [dbo].[" + Table(customer, employee) + "]";
             return DataTable();
         }
+        
         /// <summary>
         /// This declare from which table data will be read
         /// </summary>

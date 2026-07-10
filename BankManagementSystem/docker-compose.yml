@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  bankmanagementsystem:
+    image: bankmanagementsystem:latest
+    container_name: bankmanagementsystem
+    build:
+      context: ..
+      dockerfile: BankManagementSystem/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - HEALTH_CHECK_PORT=8080
+      - STARTUP_USER=containeruser
+      - DATABASE_CONNECTION_STRING=${DATABASE_CONNECTION_STRING:-Server=host.docker.internal;Database=BankDB;User Id=sa;Password=YourPassword123;}
+    networks:
+      - app-network
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8080/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

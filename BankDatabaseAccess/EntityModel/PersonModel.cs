@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,32 +6,47 @@ using System.Threading.Tasks;
 
 namespace BankDatabaseAccess.EntityModel
 {
-    public  class PersonModel
+    public class PersonModel
     {
         /// <summary>
         /// This is the Person Username. Value can not be null.
         /// </summary>
         public string Username { get; set; }
+        
         /// <summary>
-        /// This is the person Full name. Valu can not be null.
+        /// This is the person Full name. Value can not be null.
         /// </summary>
         public string FullName { get; set; }
+        
         /// <summary>
-        /// This is the Person Password. Value can not be null.
+        /// This is the person Password. Value can not be null.
         /// </summary>
         public string Password { get; set; }
+        
         /// <summary>
         /// This is the person Email. Value can not be null.
         /// </summary>
-        public string Eamil { get; set; }
+        public string Email { get; set; }
+        
         /// <summary>
-        /// This is person phone number
+        /// This is the person Email (alternative property name for compatibility).
+        /// </summary>
+        public string Eamil 
+        { 
+            get => Email; 
+            set => Email = value; 
+        }
+        
+        /// <summary>
+        /// This is person phone number.
         /// </summary>
         public string Phone { get; set; }
+        
         /// <summary>
-        /// This is person National ID number. Value can not be null.
+        /// This is person National ID number.
         /// </summary>
         public string Nid { get; set; }
+        
         /// <summary>
         /// This is person Address. Value cant be null.
         /// </summary>
