@@ -204,10 +204,20 @@
     <None Include="Resources\gitIcon.png" />
   </ItemGroup>
   <ItemGroup>
-  <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-  <PackageReference Include="log4net" Version="2.0.8" />
-  <PackageReference Include="HtmlAgilityPack" Version="1.8.11" />
-  <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.1" />
-</ItemGroup>
+    <!-- Existing packages -->
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="log4net" Version="2.0.8" />
+    <PackageReference Include="HtmlAgilityPack" Version="1.8.11" />
+    <PackageReference Include="Newtonsoft.Json.Bson" Version="1.0.1" />
+    <!-- GCP cloud-native packages added for cloud readiness fixes -->
+    <!-- cr-dotnet-0043: Google Cloud Pub/Sub replaces MSMQ (System.Messaging) -->
+    <PackageReference Include="Google.Cloud.PubSub.V1" Version="3.6.0" />
+    <!-- cr-dotnet-0002/0003: Google Cloud Storage replaces local file system writes -->
+    <PackageReference Include="Google.Cloud.Storage.V1" Version="4.7.0" />
+    <!-- cr-dotnet-0008: Google Cloud Firestore replaces singleton static state -->
+    <PackageReference Include="Google.Cloud.Firestore" Version="3.4.0" />
+    <!-- cr-dotnet-0040: Google Secret Manager replaces Windows Registry -->
+    <PackageReference Include="Google.Cloud.SecretManager.V1" Version="2.3.0" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
