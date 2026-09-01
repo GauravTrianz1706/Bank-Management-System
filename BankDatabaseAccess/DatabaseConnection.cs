@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BankDatabaseAccess
 {
     public static class DatabaseConnection
     {
-        public static readonly string Connection = System.Configuration.ConfigurationManager.ConnectionStrings["OpenBankLocal"].ConnectionString;
+        // Replaced Web.config/ConfigurationManager with environment variable for cloud-native configuration.
+        // The connection string is now read from the BANKAPP_CONNECTION_STRING environment variable,
+        // enabling runtime configuration without rebuilding (12-factor app principle).
+        public static readonly string Connection =
+            Environment.GetEnvironmentVariable("BANKAPP_CONNECTION_STRING")
+            ?? throw new InvalidOperationException(
+                "Database connection string is not configured. " +
+                "Set the 'BANKAPP_CONNECTION_STRING' environment variable.");
 
-       public enum Error
+        public enum Error
         {
             UsernameExist = 4001
         }
@@ -27,9 +30,8 @@ namespace BankDatabaseAccess
                 }
                 catch (SqlException)
                 {
-                   return (int)Error.UsernameExist;
+                    return (int)Error.UsernameExist;
                 }
-
             }
         }
     }
